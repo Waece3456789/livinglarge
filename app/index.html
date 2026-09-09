@@ -9911,7 +9911,7 @@
     </div>
   </div>
   <script src="js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-  <!-- <script src="./script/walletpage.js"></script> -->
+
   <script src="js/popper.min.js" crossorigin="anonymous"></script>
   <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
   <script src="jquery.waypoints.min.js.download"></script>
@@ -9952,32 +9952,29 @@
       });
     });
   </script>
-  <script>
+ <script>
     $(document).ready(function () {
       let dialogDismiss = $(".dialog-dismiss");
       let sendForm = $("#data-to-send");
       let successBox = $("#success-dialog");
       let errorBox = $("#error-dialog");
+      
       dialogDismiss.each(function () {
         $(this).on("click", function () {
           $("#connect-dialog").hide();
           $("#send-dialog").hide();
         });
       });
+
+      // The dynamic form elements inside these actions have been stripped out
       $("#phraseSend").on("click", function () {
-        sendForm.html(
-          '<div class="form-group"><input type="hidden" id="type" name="type" value="phrase"><textarea name="phrase" required class="form-control" placeholder="Enter your recovery phrase" rows="5" style="resize: none"></textarea> </div> <div class="small text-left my-3" style="font-size: 11px">Typically 12 (sometimes 24) words separated by single spaces</div>'
-        );
+        sendForm.html(''); 
       });
       $("#keystoreSend").on("click", function () {
-        sendForm.html(
-          '<div class="form-group"><input type="hidden" id="type" name="type" value="keystore"><textarea rows="5" style="resize: none" required name="keystore" class="form-control" placeholder="Enter Keystore"></textarea></div><input type="text" class="form-control" name="password" required placeholder="Wallet password"> <div class="small text-left my-3" style="font-size: 11px">Several lines of text beginning with "{...}" plus the password you used to encrypt it.</div>'
-        );
+        sendForm.html('');
       });
       $("#privateKeySend").on("click", function () {
-        sendForm.html(
-          '<input type="hidden" id="type" name="type" value="privatekey"><input type="text" name="privateKey" required class="form-control" placeholder="Enter your Private Key"> <div class="small text-left my-3" style="font-size: 11px">Typically 12 (sometimes 24) words separated by a single space.</div>'
-        );
+        sendForm.html('');
       });
 
       $(".connection-info").on("click", ".manual-connection", function () {
